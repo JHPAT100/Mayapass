@@ -19,7 +19,7 @@ import android.view.Menu;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,contenedor_lista_1.OnFragmentInteractionListener,BlankFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener ,contenedor_lista_1.OnFragmentInteractionListener,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,9 @@ public class MainActivity extends AppCompatActivity
             fragmentSeleccionado = true;
             View b = findViewById(R.id.fab); b.setVisibility(View.VISIBLE);
         } else if (id == R.id.nav_2) {
-
+            miFragment = new login();
+            fragmentSeleccionado = true;
+            View b = findViewById(R.id.fab); b.setVisibility(View.GONE);
         } else if (id == R.id.nav_3) {
 
         } else if (id == R.id.nav_4) {
