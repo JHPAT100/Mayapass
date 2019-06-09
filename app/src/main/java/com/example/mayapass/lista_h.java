@@ -54,7 +54,7 @@ public class lista_h extends Fragment implements Response.Listener<JSONObject>, 
 
     RecyclerView recyclerHistorias;
     ArrayList<Historias> listaHistorias;
-
+public static String titulo,historia;
     ProgressDialog progress;
 Button btn;
     RequestQueue request;
@@ -157,9 +157,11 @@ btn=vista.findViewById(R.id.fab);
             adapter.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    titulo=listaHistorias.get(recyclerHistorias.getChildAdapterPosition(v)).getNombre_h();
+                    historia=listaHistorias.get(recyclerHistorias.getChildAdapterPosition(v)).getHistoria();
                     Toast.makeText(getContext(), "Seleccion:"+listaHistorias.get(recyclerHistorias.getChildAdapterPosition(v)).getNombre_h(), Toast.LENGTH_LONG).show();
                     FragmentTransaction trans = getFragmentManager().beginTransaction();
-                    trans.replace(R.id.contenedor_principal, new registro_h());
+                    trans.replace(R.id.contenedor_principal, new mostrar_h());
                     trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                     trans.addToBackStack(null);
 

@@ -20,7 +20,8 @@ import android.view.Menu;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener,registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener,lista_h.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener ,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener,
+        registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener,lista_h.OnFragmentInteractionListener,mostrar_h.OnFragmentInteractionListener{
     public static View bf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
