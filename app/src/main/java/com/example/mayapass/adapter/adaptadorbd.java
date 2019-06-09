@@ -40,6 +40,7 @@ public class adaptadorbd extends RecyclerView.Adapter<adaptadorbd.HistoriasHolde
     public void onBindViewHolder(HistoriasHolder holder, int position) {
         holder.te_1.setText(listaHistorias.get(position).getNombre_h().toString());
         holder.te_2.setText(listaHistorias.get(position).getCorreo_h().toString());
+        holder.te_3.setText(listaHistorias.get(position).getHistoria().toString());
 
     }
 
@@ -59,12 +60,13 @@ this.listener=listener;
 
     public class HistoriasHolder extends RecyclerView.ViewHolder{
 
-        TextView te_1,te_2;
+        TextView te_1,te_2,te_3;
 
         public HistoriasHolder(View itemView) {
             super(itemView);
             te_1= (TextView) itemView.findViewById(R.id.con_1);
             te_2= (TextView) itemView.findViewById(R.id.con_2);
+            te_3= (TextView) itemView.findViewById(R.id.con_3);
 
 
         }

@@ -148,6 +148,7 @@ btn=vista.findViewById(R.id.fab);
                 jsonObject=json.getJSONObject(i);
                 historias.setCorreo_h(jsonObject.optString("correo"));
                 historias.setNombre_h(jsonObject.optString("nombre_historia"));
+                historias.setHistoria(jsonObject.optString("historia"));
                 listaHistorias.add(historias);
             }
             progress.hide();
