@@ -19,7 +19,7 @@ import android.view.Menu;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,contenedor_lista_1.OnFragmentInteractionListener,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener,registro_usuario.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener ,contenedor_lista_1.OnFragmentInteractionListener,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener,registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,9 +91,7 @@ public class MainActivity extends AppCompatActivity
             fragmentSeleccionado = true;
             View b = findViewById(R.id.fab); b.setVisibility(View.VISIBLE);
         } else if (id == R.id.nav_2) {
-            miFragment = new login();
-            fragmentSeleccionado = true;
-            View b = findViewById(R.id.fab); b.setVisibility(View.GONE);
+
         } else if (id == R.id.nav_3) {
             miFragment = new contenedor_lista_1();
             fragmentSeleccionado = true;
@@ -106,9 +104,7 @@ public class MainActivity extends AppCompatActivity
             View b = findViewById(R.id.fab); b.setVisibility(View.GONE);
 
         } else if (id == R.id.nav_6) {
-            miFragment = new registro_usuario();
-            fragmentSeleccionado = true;
-            View b = findViewById(R.id.fab); b.setVisibility(View.GONE);
+
         } else if (id == R.id.nav_7) {
 
     } else if (id == R.id.nav_8) {
@@ -116,7 +112,9 @@ public class MainActivity extends AppCompatActivity
     } else if (id == R.id.nav_9) {
 
     } else if (id == R.id.nav_10) {
-
+            miFragment = new login();
+            fragmentSeleccionado = true;
+            View b = findViewById(R.id.fab); b.setVisibility(View.GONE);
     }
         if(fragmentSeleccionado=true){
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_principal,miFragment).commit();

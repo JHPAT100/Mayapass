@@ -139,7 +139,7 @@ btn1=vista.findViewById(R.id.btn_1);
         com=te_1.getText().toString();
         if (com.equals(user.getCorreo())){
             FragmentTransaction trans = getFragmentManager().beginTransaction();
-            trans.replace(R.id.contenedor_principal, new registro_usuario());
+            trans.replace(R.id.contenedor_principal, new registro_h());
             trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             trans.addToBackStack(null);
 

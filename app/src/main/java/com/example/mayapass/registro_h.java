@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link registrar_historia.OnFragmentInteractionListener} interface
+ * {@link registro_h.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link registrar_historia#newInstance} factory method to
+ * Use the {@link registro_h#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class registrar_historia extends Fragment {
+public class registro_h extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +29,7 @@ public class registrar_historia extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public registrar_historia() {
+    public registro_h() {
         // Required empty public constructor
     }
 
@@ -39,11 +39,11 @@ public class registrar_historia extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment registrar_historia.
+     * @return A new instance of fragment registro_h.
      */
     // TODO: Rename and change types and number of parameters
-    public static registrar_historia newInstance(String param1, String param2) {
-        registrar_historia fragment = new registrar_historia();
+    public static registro_h newInstance(String param1, String param2) {
+        registro_h fragment = new registro_h();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +64,7 @@ public class registrar_historia extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registrar_historia, container, false);
+        return inflater.inflate(R.layout.fragment_registro_h, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
