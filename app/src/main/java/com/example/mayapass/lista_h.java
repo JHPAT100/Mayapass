@@ -5,13 +5,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,39 +19,45 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.mayapass.entidades.Usuario;
+import com.example.mayapass.adapter.adaptadorbd;
+import com.example.mayapass.entidades.Historias;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link login.OnFragmentInteractionListener} interface
+ * {@link lista_h.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link login#newInstance} factory method to
+ * Use the {@link lista_h#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class login extends Fragment implements Response.Listener<JSONObject>, Response.ErrorListener, View.OnClickListener {
+public class lista_h extends Fragment implements Response.Listener<JSONObject>, Response.ErrorListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-EditText te_1,te_2;
-Button btn,btn1;
-ProgressDialog progreso;
-    String com;
-RequestQueue request;
-JsonObjectRequest jsonObjectRequest;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public login() {
+    RecyclerView recyclerHistorias;
+    ArrayList<Historias> listaHistorias;
+
+    ProgressDialog progress;
+
+    RequestQueue request;
+    JsonObjectRequest jsonObjectRequest;
+
+    public lista_h() {
         // Required empty public constructor
     }
 
@@ -62,11 +67,11 @@ JsonObjectRequest jsonObjectRequest;
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment login.
+     * @return A new instance of fragment lista_h.
      */
     // TODO: Rename and change types and number of parameters
-    public static login newInstance(String param1, String param2) {
-        login fragment = new login();
+    public static lista_h newInstance(String param1, String param2) {
+        lista_h fragment = new lista_h();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,7 +83,6 @@ JsonObjectRequest jsonObjectRequest;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            MainActivity.bf.setVisibility(View.GONE);
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -87,32 +91,36 @@ JsonObjectRequest jsonObjectRequest;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-      View vista =inflater.inflate(R.layout.fragment_login, container, false);
-        te_1=vista.findViewById(R.id.email);
-        te_2=vista.findViewById(R.id.password);
-        btn=vista.findViewById(R.id.btn_login);
-btn1=vista.findViewById(R.id.btn_1);
-        request= Volley.newRequestQueue(getContext());
-        com=te_1.getText().toString();
-        btn1.setOnClickListener(this);
-        btn.setOnClickListener(this);
+        // Inflate the layout for this fragment
+        View vista= inflater.inflate(R.layout.fragment_lista_h, container, false);
 
+        listaHistorias=new ArrayList<>();
+
+        recyclerHistorias= vista.findViewById(R.id.listaR);
+        recyclerHistorias.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerHistorias.setHasFixedSize(true);
+
+        request= Volley.newRequestQueue(getContext());
+
+        cargarWebService();
 
         return vista;
     }
 
     private void cargarWebService() {
-        //barra de dialogo
-        progreso=new ProgressDialog(getContext());
-        progreso.setMessage("Consultando...");
-        progreso.show();
-        //barra de dialogo
+        progress=new ProgressDialog(getContext());
+        progress.setMessage("Consultando...");
+        progress.show();
 
-        String URL="http://puntosingular.mx/maya/consultar.php?correo="+te_1.getText().toString()+"&contraseña="+te_2.getText().toString();
-        jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,URL,null,this,this);
+
+        String url="http://puntosingular.mx/maya/consultar_lista.php";
+
+        jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
         request.add(jsonObjectRequest);
+
     }
 
+    //prueba
     @Override
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(getContext(),"No se pudo consultar"+error.toString(),Toast.LENGTH_SHORT).show();
@@ -121,35 +129,34 @@ btn1=vista.findViewById(R.id.btn_1);
 
     @Override
     public void onResponse(JSONObject response) {
-        progreso.hide();
-        Toast.makeText(getContext(),"Mensaje:"+response,Toast.LENGTH_SHORT).show();
-        Usuario user=new Usuario();
-        JSONArray json= response.optJSONArray("usuario");
-        JSONObject jsonObject=null;
+        Historias historias=null;
+
+        JSONArray json=response.optJSONArray("comunidad");
 
         try {
-            jsonObject=json.getJSONObject(0);
 
-            user.setNombre(jsonObject.optString("nombre"));
-            user.setCorreo(jsonObject.optString("correo"));
-            user.setContraseña(jsonObject.optString("contraseña"));
+            for (int i=0;i<json.length();i++){
+                historias=new Historias();
+                JSONObject jsonObject=null;
+                jsonObject=json.getJSONObject(i);
+                historias.setCorreo_h(jsonObject.optString("correo"));
+                historias.setNombre_h(jsonObject.optString("nombre_historia"));
+                listaHistorias.add(historias);
+            }
+            progress.hide();
+            adaptadorbd adapter=new adaptadorbd(listaHistorias);
+            recyclerHistorias.setAdapter(adapter);
+
         } catch (JSONException e) {
             e.printStackTrace();
+            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                    " "+response, Toast.LENGTH_LONG).show();
+            progress.hide();
         }
-        com=te_1.getText().toString();
-        if (com.equals(user.getCorreo())){
-
-            FragmentTransaction trans = getFragmentManager().beginTransaction();
-            trans.replace(R.id.contenedor_principal, new registro_h());
-            trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            trans.addToBackStack(null);
-
-            trans.commit();
-        }
-
     }
 
-    //pruebas
+
+    //prueba
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -174,20 +181,6 @@ btn1=vista.findViewById(R.id.btn_1);
         mListener = null;
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v==btn){
-            cargarWebService();
-        }
-        if(v==btn1){
-            FragmentTransaction trans = getFragmentManager().beginTransaction();
-            trans.replace(R.id.contenedor_principal, new lista_h());
-            trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            trans.addToBackStack(null);
-
-            trans.commit();
-        }
-    }
 
 
     /**

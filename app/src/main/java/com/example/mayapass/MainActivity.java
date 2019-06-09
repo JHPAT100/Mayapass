@@ -20,7 +20,7 @@ import android.view.Menu;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener ,contenedor_lista_1.OnFragmentInteractionListener,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener,registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener ,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener,registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener,lista_h.OnFragmentInteractionListener{
     public static View bf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         //coloca un fragmento como principal
-        Fragment fragment=new contenedor_lista_1();
+        Fragment fragment=new login();
         getSupportFragmentManager().beginTransaction().add(R.id.contenedor_principal,fragment).commit();
         //termina el codigo
         navigationView.setNavigationItemSelectedListener(this);
@@ -89,13 +89,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_1) {
-            miFragment = new contenedor_lista_1();
+            miFragment = new login();
             fragmentSeleccionado = true;
             bf = findViewById(R.id.fab); bf.setVisibility(View.VISIBLE);
         } else if (id == R.id.nav_2) {
 
         } else if (id == R.id.nav_3) {
-            miFragment = new contenedor_lista_1();
+            miFragment = new login();
             fragmentSeleccionado = true;
         bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
         } else if (id == R.id.nav_4) {
