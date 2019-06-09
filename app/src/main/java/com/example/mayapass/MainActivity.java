@@ -1,5 +1,6 @@
 package com.example.mayapass;
 
+import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,contenedor_lista_1.OnFragmentInteractionListener,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener,registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener{
-
+    public static View bf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        bf = findViewById(R.id.fab);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -89,19 +91,19 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_1) {
             miFragment = new contenedor_lista_1();
             fragmentSeleccionado = true;
-            View b = findViewById(R.id.fab); b.setVisibility(View.VISIBLE);
+            bf = findViewById(R.id.fab); bf.setVisibility(View.VISIBLE);
         } else if (id == R.id.nav_2) {
 
         } else if (id == R.id.nav_3) {
             miFragment = new contenedor_lista_1();
             fragmentSeleccionado = true;
-            View b = findViewById(R.id.fab); b.setVisibility(View.GONE);
+        bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
         } else if (id == R.id.nav_4) {
 
         } else if (id == R.id.nav_5) {
             miFragment = new BlankFragment();
             fragmentSeleccionado = true;
-            View b = findViewById(R.id.fab); b.setVisibility(View.GONE);
+         bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
 
         } else if (id == R.id.nav_6) {
 
@@ -114,7 +116,7 @@ public class MainActivity extends AppCompatActivity
     } else if (id == R.id.nav_10) {
             miFragment = new login();
             fragmentSeleccionado = true;
-            View b = findViewById(R.id.fab); b.setVisibility(View.GONE);
+          bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
     }
         if(fragmentSeleccionado=true){
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_principal,miFragment).commit();

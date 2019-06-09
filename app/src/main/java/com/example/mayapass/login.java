@@ -44,7 +44,6 @@ EditText te_1,te_2;
 Button btn,btn1;
 ProgressDialog progreso;
     String com;
-
 RequestQueue request;
 JsonObjectRequest jsonObjectRequest;
     // TODO: Rename and change types of parameters
@@ -79,6 +78,7 @@ JsonObjectRequest jsonObjectRequest;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            MainActivity.bf.setVisibility(View.GONE);
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -138,6 +138,7 @@ btn1=vista.findViewById(R.id.btn_1);
         }
         com=te_1.getText().toString();
         if (com.equals(user.getCorreo())){
+
             FragmentTransaction trans = getFragmentManager().beginTransaction();
             trans.replace(R.id.contenedor_principal, new registro_h());
             trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
