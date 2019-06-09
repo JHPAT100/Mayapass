@@ -56,8 +56,8 @@ public class contenedor_lista_1 extends Fragment {
 
     };
 
-    int [] imgComida ={R.drawable.icono_t,R.drawable.icono_t,R.drawable.icono_t,R.drawable.icono_t,R.drawable.icono_t,
-                       R.drawable.icono_t,R.drawable.icono_t,R.drawable.icono_t,R.drawable.icono_t,R.drawable.icono_t};
+    int [] imgComida ={R.drawable.tortilla, R.drawable.pozole, R.drawable.frijol, R.drawable.chocolate, R.drawable.pocchuc,
+                       R.drawable.tamales,R.drawable.panuchos,R.drawable.salbutes,R.drawable.cochinita,R.drawable.atole};
 
 
 
