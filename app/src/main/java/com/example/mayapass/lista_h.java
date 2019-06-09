@@ -2,6 +2,7 @@ package com.example.mayapass;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -104,6 +105,9 @@ public class lista_h extends Fragment implements Response.Listener<JSONObject>, 
 
         cargarWebService();
 
+
+
+
         return vista;
     }
 
@@ -145,6 +149,14 @@ public class lista_h extends Fragment implements Response.Listener<JSONObject>, 
             }
             progress.hide();
             adaptadorbd adapter=new adaptadorbd(listaHistorias);
+
+            adapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getContext(), "Seleccion:"+listaHistorias.get(recyclerHistorias.getChildAdapterPosition(v)).getNombre_h(), Toast.LENGTH_LONG).show();
+                }
+            });
+
             recyclerHistorias.setAdapter(adapter);
 
         } catch (JSONException e) {

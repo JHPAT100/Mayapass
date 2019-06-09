@@ -14,9 +14,10 @@ import com.example.mayapass.entidades.Historias;
 
 import java.util.List;
 
-public class adaptadorbd extends RecyclerView.Adapter<adaptadorbd.HistoriasHolder>{
+public class adaptadorbd extends RecyclerView.Adapter<adaptadorbd.HistoriasHolder> implements View.OnClickListener {
 
     List<Historias> listaHistorias;
+    private View.OnClickListener listener;
     public adaptadorbd(List<Historias> listaHistorias) {
         this.listaHistorias = listaHistorias;
     }
@@ -30,6 +31,8 @@ public class adaptadorbd extends RecyclerView.Adapter<adaptadorbd.HistoriasHolde
         RecyclerView.LayoutParams layoutParams=new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         vista.setLayoutParams(layoutParams);
+
+        vista.setOnClickListener(this);
         return new HistoriasHolder(vista);
     }
 
@@ -43,6 +46,15 @@ public class adaptadorbd extends RecyclerView.Adapter<adaptadorbd.HistoriasHolde
     @Override
     public int getItemCount() {
         return listaHistorias.size();
+    }
+public void setOnClickListener(View.OnClickListener listener){
+this.listener=listener;
+    }
+    @Override
+    public void onClick(View v) {
+        if(listener!=null){
+            listener.onClick(v);
+        }
     }
 
     public class HistoriasHolder extends RecyclerView.ViewHolder{
