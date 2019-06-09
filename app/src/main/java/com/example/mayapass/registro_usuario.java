@@ -89,11 +89,13 @@ Button btn,btn1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        MainActivity.bf.setVisibility(View.GONE);
         View vista = inflater.inflate(R.layout.fragment_registro_usuario, container, false);
         te_1 = vista.findViewById(R.id.c_Nombre);
         te_2 = vista.findViewById(R.id.c_correo);
         te_3 = vista.findViewById(R.id.c_contraseña);
         te_4 = vista.findViewById(R.id.contraseña_repetir);
+
         btn = vista.findViewById(R.id.btn_registro);
         btn1 = vista.findViewById(R.id.btnlogin);
         request = Volley.newRequestQueue(getContext());
@@ -115,8 +117,12 @@ Button btn,btn1;
 
     @Override
     public void onResponse(JSONObject response) {
-        Toast.makeText(getContext(),"se a resgistrado correctamente",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"Se a resgistrado correctamente",Toast.LENGTH_SHORT).show();
         progreso.hide();
+        te_1.setText("");
+        te_2.setText("");
+        te_3.setText("");
+        te_4.setText("");
     }
     private void cargarWebService() {
         //barra de dialogo

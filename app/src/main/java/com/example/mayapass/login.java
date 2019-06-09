@@ -2,6 +2,7 @@ package com.example.mayapass;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -87,6 +88,7 @@ JsonObjectRequest jsonObjectRequest;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        MainActivity.bf.setVisibility(View.GONE);
       View vista =inflater.inflate(R.layout.fragment_login, container, false);
         te_1=vista.findViewById(R.id.email);
         te_2=vista.findViewById(R.id.password);
@@ -138,13 +140,22 @@ btn1=vista.findViewById(R.id.btn_1);
         }
         com=te_1.getText().toString();
         if (com.equals(user.getCorreo())){
-
+            te_1.setText("");
+            te_2.setText("");
             FragmentTransaction trans = getFragmentManager().beginTransaction();
-            trans.replace(R.id.contenedor_principal, new registro_h());
+            trans.replace(R.id.contenedor_principal, new lista_h());
             trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             trans.addToBackStack(null);
 
             trans.commit();
+        }else{
+            te_1.setError("Datos incorrectos");
+            te_2.setError("Datos incorrectos");
+            te_1.setText("");
+            te_2.setText("");
+            te_1.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+            te_2.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+            Toast.makeText(getContext(),"No se pudo ingresar",Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -181,7 +192,7 @@ btn1=vista.findViewById(R.id.btn_1);
         }
         if(v==btn1){
             FragmentTransaction trans = getFragmentManager().beginTransaction();
-            trans.replace(R.id.contenedor_principal, new lista_h());
+            trans.replace(R.id.contenedor_principal, new registro_usuario());
             trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             trans.addToBackStack(null);
 

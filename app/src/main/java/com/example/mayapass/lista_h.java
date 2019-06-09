@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -83,6 +84,7 @@ public class lista_h extends Fragment implements Response.Listener<JSONObject>, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.bf.setVisibility(View.VISIBLE);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -112,6 +114,7 @@ public class lista_h extends Fragment implements Response.Listener<JSONObject>, 
     }
 
     private void cargarWebService() {
+        MainActivity.bf.setVisibility(View.VISIBLE);
         progress=new ProgressDialog(getContext());
         progress.setMessage("Consultando...");
         progress.show();
@@ -154,6 +157,12 @@ public class lista_h extends Fragment implements Response.Listener<JSONObject>, 
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getContext(), "Seleccion:"+listaHistorias.get(recyclerHistorias.getChildAdapterPosition(v)).getNombre_h(), Toast.LENGTH_LONG).show();
+                    FragmentTransaction trans = getFragmentManager().beginTransaction();
+                    trans.replace(R.id.contenedor_principal, new registro_h());
+                    trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    trans.addToBackStack(null);
+
+                    trans.commit();
                 }
             });
 
