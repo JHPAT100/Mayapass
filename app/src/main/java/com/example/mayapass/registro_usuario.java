@@ -2,6 +2,8 @@ package com.example.mayapass;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,40 +22,39 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.mayapass.entidades.Usuario;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link login.OnFragmentInteractionListener} interface
+ * {@link registro_usuario.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link login#newInstance} factory method to
+ * Use the {@link registro_usuario#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class login extends Fragment implements Response.Listener<JSONObject>, Response.ErrorListener, View.OnClickListener {
+public class registro_usuario extends Fragment implements Response.Listener<JSONObject>, Response.ErrorListener, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-EditText te_1,te_2;
-Button btn,btn1;
-ProgressDialog progreso;
-    String com;
 
-RequestQueue request;
-JsonObjectRequest jsonObjectRequest;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+EditText te_1,te_2,te_3,te_4;
+Button btn,btn1;
 
+    //barra de progreso
+    ProgressDialog progreso;
+
+    //importante
+    RequestQueue request;
+    JsonObjectRequest jsonObjectRequest;
     private OnFragmentInteractionListener mListener;
 
-    public login() {
+    public registro_usuario() {
         // Required empty public constructor
     }
 
@@ -63,11 +64,11 @@ JsonObjectRequest jsonObjectRequest;
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment login.
+     * @return A new instance of fragment registro_usuario.
      */
     // TODO: Rename and change types and number of parameters
-    public static login newInstance(String param1, String param2) {
-        login fragment = new login();
+    public static registro_usuario newInstance(String param1, String param2) {
+        registro_usuario fragment = new registro_usuario();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -87,13 +88,15 @@ JsonObjectRequest jsonObjectRequest;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-      View vista =inflater.inflate(R.layout.fragment_login, container, false);
-        te_1=vista.findViewById(R.id.email);
-        te_2=vista.findViewById(R.id.password);
-        btn=vista.findViewById(R.id.btn_login);
-btn1=vista.findViewById(R.id.btn_1);
-        request= Volley.newRequestQueue(getContext());
-        com=te_1.getText().toString();
+        View vista = inflater.inflate(R.layout.fragment_registro_usuario, container, false);
+        te_1 = vista.findViewById(R.id.c_Nombre);
+        te_2 = vista.findViewById(R.id.c_correo);
+        te_3 = vista.findViewById(R.id.c_contraseña);
+        te_4 = vista.findViewById(R.id.contraseña_repetir);
+        btn = vista.findViewById(R.id.btn_registro);
+        btn1 = vista.findViewById(R.id.btnlogin);
+        request = Volley.newRequestQueue(getContext());
+
         btn1.setOnClickListener(this);
         btn.setOnClickListener(this);
 
@@ -101,54 +104,38 @@ btn1=vista.findViewById(R.id.btn_1);
         return vista;
     }
 
-    private void cargarWebService() {
-        //barra de dialogo
-        progreso=new ProgressDialog(getContext());
-        progreso.setMessage("Consultando...");
-        progreso.show();
-        //barra de dialogo
-
-        String URL="http://puntosingular.mx/maya/consultar.php?correo="+te_1.getText().toString()+"&contraseña="+te_2.getText().toString();
-        jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,URL,null,this,this);
-        request.add(jsonObjectRequest);
-    }
-
+    //pruebas
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(),"No se pudo consultar"+error.toString(),Toast.LENGTH_SHORT).show();
+        progreso.hide();
+        Toast.makeText(getContext(),"No se pudo registrar"+error.toString(),Toast.LENGTH_SHORT).show();
         Log.i("Error",error.toString());
     }
 
     @Override
     public void onResponse(JSONObject response) {
+        Toast.makeText(getContext(),"se a resgistrado correctamente",Toast.LENGTH_SHORT).show();
         progreso.hide();
-        Toast.makeText(getContext(),"Mensaje:"+response,Toast.LENGTH_SHORT).show();
-        Usuario user=new Usuario();
-        JSONArray json= response.optJSONArray("usuario");
-        JSONObject jsonObject=null;
-
-        try {
-            jsonObject=json.getJSONObject(0);
-
-            user.setNombre(jsonObject.optString("nombre"));
-            user.setCorreo(jsonObject.optString("correo"));
-            user.setContraseña(jsonObject.optString("contraseña"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        com=te_1.getText().toString();
-        if (com.equals(user.getCorreo())){
-            FragmentTransaction trans = getFragmentManager().beginTransaction();
-            trans.replace(R.id.contenedor_principal, new registro_usuario());
-            trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            trans.addToBackStack(null);
-
-            trans.commit();
-        }
-
     }
+    private void cargarWebService() {
+        //barra de dialogo
+        progreso=new ProgressDialog(getContext());
+        progreso.setMessage("cargando....");
+        progreso.show();
+        //barra de dialogo
+        String URL="http://puntosingular.mx/maya/registro.php?nombre="+te_1.getText().toString()+"&correo="+te_2.getText().toString()+"&contraseña="+te_3.getText().toString();
 
+
+
+        jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,URL,null,this,this);
+        request.add(jsonObjectRequest);
+    }
     //pruebas
+
+
+
+//pruebas
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -176,11 +163,23 @@ btn1=vista.findViewById(R.id.btn_1);
     @Override
     public void onClick(View v) {
         if(v==btn){
-            cargarWebService();
+            String a1,a2;
+            a1=te_3.getText().toString();
+            a2=te_4.getText().toString();
+
+            if(a1.equals(a2)){
+                cargarWebService();
+            }
+            else{
+                te_4.setError("La contraseña no es igual");
+                te_4.setText("");
+                te_4.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+                Toast.makeText(getContext(),"No se pudo registrar",Toast.LENGTH_SHORT).show();
+            }
         }
         if(v==btn1){
             FragmentTransaction trans = getFragmentManager().beginTransaction();
-            trans.replace(R.id.contenedor_principal, new registro_usuario());
+            trans.replace(R.id.contenedor_principal, new login());
             trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             trans.addToBackStack(null);
 
