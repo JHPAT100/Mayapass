@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -55,10 +56,9 @@ public class lista_h extends Fragment implements Response.Listener<JSONObject>, 
     ArrayList<Historias> listaHistorias;
 
     ProgressDialog progress;
-
+Button btn;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
-
     public lista_h() {
         // Required empty public constructor
     }
@@ -102,12 +102,10 @@ public class lista_h extends Fragment implements Response.Listener<JSONObject>, 
         recyclerHistorias= vista.findViewById(R.id.listaR);
         recyclerHistorias.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerHistorias.setHasFixedSize(true);
-
+btn=vista.findViewById(R.id.fab);
         request= Volley.newRequestQueue(getContext());
 
         cargarWebService();
-
-
 
 
         return vista;
@@ -124,6 +122,8 @@ public class lista_h extends Fragment implements Response.Listener<JSONObject>, 
 
         jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
         request.add(jsonObjectRequest);
+
+
 
     }
 

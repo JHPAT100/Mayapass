@@ -124,7 +124,6 @@ btn1=vista.findViewById(R.id.btn_1);
     @Override
     public void onResponse(JSONObject response) {
         progreso.hide();
-        Toast.makeText(getContext(),"Mensaje:"+response,Toast.LENGTH_SHORT).show();
         Usuario user=new Usuario();
         JSONArray json= response.optJSONArray("usuario");
         JSONObject jsonObject=null;

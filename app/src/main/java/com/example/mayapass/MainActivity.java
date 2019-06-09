@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Fragment miFragment = new registro_h();
+                getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_principal,miFragment).commit();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -114,9 +114,9 @@ public class MainActivity extends AppCompatActivity
     } else if (id == R.id.nav_9) {
 
     } else if (id == R.id.nav_10) {
-            miFragment = new login();
-            fragmentSeleccionado = true;
-          bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
+        miFragment = new login();
+        fragmentSeleccionado = true;
+        bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
     }
         if(fragmentSeleccionado=true){
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_principal,miFragment).commit();
