@@ -21,7 +21,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener,
-        registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener,lista_h.OnFragmentInteractionListener,mostrar_h.OnFragmentInteractionListener{
+        registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener,lista_h.OnFragmentInteractionListener,
+        mostrar_h.OnFragmentInteractionListener,lista_1.OnFragmentInteractionListener,mostrar_todo.OnFragmentInteractionListener{
     public static View bf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         //coloca un fragmento como principal
-        Fragment fragment=new login();
+        Fragment fragment=new lista_1();
         getSupportFragmentManager().beginTransaction().add(R.id.contenedor_principal,fragment).commit();
         //termina el codigo
         navigationView.setNavigationItemSelectedListener(this);
@@ -88,13 +89,10 @@ public class MainActivity extends AppCompatActivity
         Fragment miFragment=null;
         boolean fragmentSeleccionado=false;
         int id = item.getItemId();
-
-        if (id == R.id.nav_1) {
-            miFragment = new login();
+         if (id == R.id.nav_2) {
+            miFragment = new lista_1();
             fragmentSeleccionado = true;
-            bf = findViewById(R.id.fab); bf.setVisibility(View.VISIBLE);
-        } else if (id == R.id.nav_2) {
-
+             bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
         } else if (id == R.id.nav_3) {
             miFragment = new login();
             fragmentSeleccionado = true;

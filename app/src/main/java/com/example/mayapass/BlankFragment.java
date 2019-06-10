@@ -54,7 +54,7 @@ public void ubicaciones (GoogleMap map){
     map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng4, zoom));
 
     // Colocar un marcador en la misma posición
-    map.addMarker(new MarkerOptions().position(latLng1).title("Dzibilchaltún"));
+    map.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.i_9)).anchor(0.0f,1.0f).position(latLng1).title("Dzibilchaltún"));
     map.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.i_9)).anchor(0.0f,1.0f).position(latLng2).title("Kohunlich"));
     map.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.i_9)).anchor(0.0f,1.0f).position(latLng3).title("Yaxhá"));
     map.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.i_9)).anchor(0.0f,1.0f).position(latLng4).title("Calakmul"));
