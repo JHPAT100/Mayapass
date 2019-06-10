@@ -45,7 +45,7 @@ public class registro_usuario extends Fragment implements Response.Listener<JSON
     private String mParam2;
 EditText te_1,te_2,te_3,te_4;
 Button btn,btn1;
-
+String t_1,t_2,t_3,t_4;
     //barra de progreso
     ProgressDialog progreso;
 
@@ -95,7 +95,10 @@ Button btn,btn1;
         te_2 = vista.findViewById(R.id.c_correo);
         te_3 = vista.findViewById(R.id.c_contraseña);
         te_4 = vista.findViewById(R.id.contraseña_repetir);
-
+t_1=te_1.getText().toString();
+        t_2=te_2.getText().toString();
+        t_3=te_3.getText().toString();
+        t_4=te_4.getText().toString();
         btn = vista.findViewById(R.id.btn_registro);
         btn1 = vista.findViewById(R.id.btnlogin);
         request = Volley.newRequestQueue(getContext());
@@ -173,7 +176,46 @@ Button btn,btn1;
             String a1,a2;
             a1=te_3.getText().toString();
             a2=te_4.getText().toString();
+if(t_1.equals(te_1.getText().toString()) && t_2.equals(te_2.getText().toString()) && t_3.equals(te_3.getText().toString()) && t_4.equals(te_4.getText().toString()) ){
+    te_1.setError("Campos Obligatorios");
+    te_2.setError("Campos Obligatorios");
+    te_3.setError("Campos Obligatorios");
+    te_4.setError("Campos Obligatorios");
+    te_1.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+    te_2.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+    te_3.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+    te_4.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+    Toast.makeText(getContext(),"Error campos obligatorios",Toast.LENGTH_SHORT).show();
+}
+          else if(t_1.equals(te_1.getText().toString()) ){
+                te_1.setError("Campos Obligatorios");
+                te_1.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+                Toast.makeText(getContext(),"Error campos obligatorios",Toast.LENGTH_SHORT).show();
+            }
+           else if(t_2.equals(te_2.getText().toString()) && t_3.equals(te_3.getText().toString()) && t_4.equals(te_4.getText().toString()) ){
+                te_2.setError("Campos Obligatorios");
+                te_3.setError("Campos Obligatorios");
+                te_4.setError("Campos Obligatorios");
+                te_2.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+                te_3.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+                te_4.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+                Toast.makeText(getContext(),"Error campos obligatorios",Toast.LENGTH_SHORT).show();
+            }
+else if(t_3.equals(te_3.getText().toString()) && t_4.equals(te_4.getText().toString()) ){
+    te_3.setError("Campos Obligatorios");
+    te_4.setError("Campos Obligatorios");
+    te_3.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+    te_4.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+    Toast.makeText(getContext(),"Error campos obligatorios",Toast.LENGTH_SHORT).show();
+}else if(t_4.equals(te_4.getText().toString()) ){
 
+    te_4.setError("Campos Obligatorios");
+
+    te_4.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
+    Toast.makeText(getContext(),"Error campos obligatorios",Toast.LENGTH_SHORT).show();
+}
+
+else{
             if(a1.equals(a2)){
                 cargarWebService();
             }
@@ -183,7 +225,7 @@ Button btn,btn1;
                 te_4.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_ATOP);
                 Toast.makeText(getContext(),"No se pudo registrar",Toast.LENGTH_SHORT).show();
             }
-        }
+        }}
         if(v==btn1){
             FragmentTransaction trans = getFragmentManager().beginTransaction();
             trans.replace(R.id.contenedor_principal, new login());
@@ -192,6 +234,7 @@ Button btn,btn1;
 
             trans.commit();
         }
+
     }
 
 

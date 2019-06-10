@@ -113,9 +113,6 @@ btn=vista.findViewById(R.id.fab);
 
     private void cargarWebService() {
         MainActivity.bf.setVisibility(View.VISIBLE);
-        progress=new ProgressDialog(getContext());
-        progress.setMessage("Consultando...");
-        progress.show();
 
 
         String url="http://puntosingular.mx/maya/consultar_lista.php";
@@ -151,7 +148,7 @@ btn=vista.findViewById(R.id.fab);
                 historias.setHistoria(jsonObject.optString("historia"));
                 listaHistorias.add(historias);
             }
-            progress.hide();
+
             adaptadorbd adapter=new adaptadorbd(listaHistorias);
 
             adapter.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +156,6 @@ btn=vista.findViewById(R.id.fab);
                 public void onClick(View v) {
                     titulo=listaHistorias.get(recyclerHistorias.getChildAdapterPosition(v)).getNombre_h();
                     historia=listaHistorias.get(recyclerHistorias.getChildAdapterPosition(v)).getHistoria();
-                    Toast.makeText(getContext(), "Seleccion:"+listaHistorias.get(recyclerHistorias.getChildAdapterPosition(v)).getNombre_h(), Toast.LENGTH_LONG).show();
                     FragmentTransaction trans = getFragmentManager().beginTransaction();
                     trans.replace(R.id.contenedor_principal, new mostrar_h());
                     trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

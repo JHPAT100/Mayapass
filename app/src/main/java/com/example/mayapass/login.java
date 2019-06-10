@@ -45,6 +45,7 @@ EditText te_1,te_2;
 Button btn,btn1;
 ProgressDialog progreso;
     String com;
+    public static  String c_user;
 RequestQueue request;
 JsonObjectRequest jsonObjectRequest;
     // TODO: Rename and change types of parameters
@@ -139,6 +140,7 @@ btn1=vista.findViewById(R.id.btn_1);
         }
         com=te_1.getText().toString();
         if (com.equals(user.getCorreo())){
+            c_user=te_1.getText().toString();
             te_1.setText("");
             te_2.setText("");
             FragmentTransaction trans = getFragmentManager().beginTransaction();

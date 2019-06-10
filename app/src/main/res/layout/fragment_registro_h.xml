@@ -54,6 +54,7 @@
                 android:layout_height="10dp" />
 
             <EditText
+                android:id="@+id/nombre_t"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -80,7 +81,7 @@
                 app:cardCornerRadius="10dp">
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/historia_t"
                     android:layout_width="300dp"
                     android:layout_height="248dp"
                     android:ems="10"
@@ -106,6 +107,7 @@
                 android:layout_height="10dp" />
 
             <Button
+                android:id="@+id/bu_1"
                 android:layout_width="138dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center"
@@ -114,6 +116,7 @@
                 android:text="Subir Historias" />
 
             <Button
+                android:id="@+id/bu_2"
                 android:layout_width="138dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center"
