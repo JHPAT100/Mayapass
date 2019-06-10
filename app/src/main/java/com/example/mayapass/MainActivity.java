@@ -22,7 +22,9 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,BlankFragment.OnFragmentInteractionListener,login.OnFragmentInteractionListener,
         registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener,lista_h.OnFragmentInteractionListener,
-        mostrar_h.OnFragmentInteractionListener,lista_1.OnFragmentInteractionListener,mostrar_todo.OnFragmentInteractionListener{
+        mostrar_h.OnFragmentInteractionListener,lista_1.OnFragmentInteractionListener,mostrar_todo.OnFragmentInteractionListener,
+        lista_2.OnFragmentInteractionListener,mostrar_m.OnFragmentInteractionListener,lista_3.OnFragmentInteractionListener,mostrar_l.OnFragmentInteractionListener
+        ,gracias.OnFragmentInteractionListener{
     public static View bf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,9 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
         //coloca un fragmento como principal
-        Fragment fragment=new lista_1();
+        Fragment fragment=new lista_2();
         getSupportFragmentManager().beginTransaction().add(R.id.contenedor_principal,fragment).commit();
         //termina el codigo
         navigationView.setNavigationItemSelectedListener(this);
@@ -94,19 +97,34 @@ public class MainActivity extends AppCompatActivity
             fragmentSeleccionado = true;
              bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
         } else if (id == R.id.nav_3) {
-            miFragment = new login();
+            miFragment = new lista_2();
             fragmentSeleccionado = true;
         bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
         } else if (id == R.id.nav_4) {
-
+             miFragment = new lista_3();
+             fragmentSeleccionado = true;
+             bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
         } else if (id == R.id.nav_5) {
             miFragment = new BlankFragment();
             fragmentSeleccionado = true;
          bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
 
         } else if (id == R.id.nav_6) {
+             Intent intent = new Intent(Intent.ACTION_SEND);
+             intent.setType("text/plain");
+             intent.putExtra(Intent.EXTRA_TEXT, "Sigueme me ayudaria mucho https://www.facebook.com/jesus.JHAPT.3");
+             startActivity(Intent.createChooser(intent, "Share with"));
+             miFragment = new gracias();
+             fragmentSeleccionado = true;
+             bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
 
         } else if (id == R.id.nav_7) {
+             miFragment = new gracias();
+             fragmentSeleccionado = true;
+             bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
+             Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","sanhool@live.com.mx", null));
+             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "System 32:");
+             startActivity(Intent.createChooser(emailIntent, "Tu opiniion es importante"));
 
     } else if (id == R.id.nav_8) {
 
