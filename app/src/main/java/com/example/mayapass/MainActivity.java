@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity
             bf = findViewById(R.id.fab); bf.setVisibility(View.VISIBLE);
         } else if (id == R.id.nav_2) {
 
+            miFragment = new ContenedorLista1();
+            fragmentSeleccionado = true;
+            bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
+
         } else if (id == R.id.nav_3) {
             miFragment = new login();
             fragmentSeleccionado = true;
