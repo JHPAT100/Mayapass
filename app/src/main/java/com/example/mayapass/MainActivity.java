@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity
         registro_usuario.OnFragmentInteractionListener,registro_h.OnFragmentInteractionListener,lista_h.OnFragmentInteractionListener,
         mostrar_h.OnFragmentInteractionListener,lista_1.OnFragmentInteractionListener,mostrar_todo.OnFragmentInteractionListener,
         lista_2.OnFragmentInteractionListener,mostrar_m.OnFragmentInteractionListener,lista_3.OnFragmentInteractionListener,mostrar_l.OnFragmentInteractionListener
-        ,gracias.OnFragmentInteractionListener{
+        ,gracias.OnFragmentInteractionListener,fotos.OnFragmentInteractionListener,company.OnFragmentInteractionListener{
     public static View bf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,9 +127,13 @@ public class MainActivity extends AppCompatActivity
              startActivity(Intent.createChooser(emailIntent, "Tu opiniion es importante"));
 
     } else if (id == R.id.nav_8) {
-
+             miFragment = new company();
+             fragmentSeleccionado = true;
+             bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
     } else if (id == R.id.nav_9) {
-
+             miFragment = new fotos();
+             fragmentSeleccionado = true;
+             bf = findViewById(R.id.fab); bf.setVisibility(View.GONE);
     } else if (id == R.id.nav_10) {
         miFragment = new login();
         fragmentSeleccionado = true;
